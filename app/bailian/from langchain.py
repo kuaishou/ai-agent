@@ -1,15 +1,3 @@
-# from langchain.agents import initialize_agent, AgentType
-# from app.bailian.common import create_calc_tools, llm
-# #智能体初始化
-# agent = initialize_agent(
-#     tools=create_calc_tools(),
-#     llm=llm,
-#     agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-#     verbose=True,
-# )
-# resp = agent.invoke("100+100=?")
-# print(resp)
-# print(resp["output"])
 from langchain.agents import create_structured_chat_agent
 from langchain.agents import AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate
