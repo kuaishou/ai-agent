@@ -5,6 +5,9 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.prompts import ChatMessagePromptTemplate
 from langchain_core.prompts import FewShotPromptTemplate
 from pydantic import BaseModel, Field
+# 修复：补充缺失的 tool 导入
+from langchain_core.tools import tool
+
 llm = ChatOpenAI(
     model="qwen3.6-plus",
     # api_key="sk-ffabef30d4b145deb70463a0105d6f3c",
@@ -33,8 +36,10 @@ chat_prompt_template = ChatPromptTemplate.from_messages([
 ])
 
 class AddInputArgs(BaseModel):
-a: int = Field(description="first number")
-b: int = Field(description="second number")
+    # 修复：添加缩进
+    a: int = Field(description="first number")
+    b: int = Field(description="second number")
+
 @tool(
     description="add two numbers",
     args_schema=AddInputArgs,
@@ -43,6 +48,7 @@ b: int = Field(description="second number")
 def add(a, b):
     """add two numbers"""
     return a + b
+
 def create_calc_tools():
     return [add]
     
