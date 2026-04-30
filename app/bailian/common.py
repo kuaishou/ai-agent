@@ -5,6 +5,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.prompts import ChatMessagePromptTemplate
 from langchain_core.prompts import FewShotPromptTemplate
 from pydantic import BaseModel, Field
+from langchain_community.agent_toolkits import FileManagementToolkit
 # 修复：补充缺失的 tool 导入
 from langchain_core.tools import tool
 
@@ -53,3 +54,6 @@ def create_calc_tools():
     return [add]
     
 calc_tools = create_calc_tools()
+
+file_toolkit = FileManagementToolkit(root_dir="/Users/sam/llm/.temp")
+file_tools = file_toolkit.get_tools()

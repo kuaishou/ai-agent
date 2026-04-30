@@ -1,5 +1,5 @@
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain.agents import initialize_agent, AgentType
+from langchain.agents import create_tool_calling_agent, AgentType
 from app.bailian.common import llm,PromptTemplate,file_tools
 from langchain_openai import ChatOpenAI  # 示例：假设使用 OpenAI，可根据实际模型调整
 import os
@@ -27,7 +27,7 @@ async def create_mcp_client():
 async def create_and_run_agent():
     client, tools = await create_mcp_client()
     
-    agent = initialize_agent(
+    agent = create_tool_calling_agent(
         tools=tools+file_tools,
         llm=llm,
         agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
@@ -55,3 +55,4 @@ async def create_and_run_agent():
 create_and_run_agent()
 # if __name__ == "__main__":
 #     asyncio.run(create_and_run_agent())
+asyncio.run(create_and_run_agent())
